@@ -4,38 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
-    <title>Calculator</title>
+    <title >Calculator</title>
 </head>
 <body>
     <div class="container">
-        <div class="screen"></div>
+        <div class="screen">
+            <div class="screen-content"></div>
+        </div>
         <div class="buttons-container">
+            <div class="row">
+                <button class="btn" id="clear-button">AC</button>
+            </div>
             <div class="row">
                 <button class="button" id="number">7</button>
                 <button class="button" id="number">8</button>
                 <button class="button" id="number">9</button>
-                <button class="button" id="operator">x</button>
+                <button class="button" id="operator">/</button>  
+                
             </div>
             <div class="row">
                 <button class="button" id="number">4</button>
                 <button class="button" id="number">5</button>
                 <button class="button" id="number">6</button>
-                <button class="button" id="operator">-</button>
+                <button class="button" id="operator">*</button>
+                
             </div>   
             <div class="row">
                 <button class="button" id="number">1</button>
                 <button class="button" id="number">2</button>
                 <button class="button" id="number">3</button>
-                <button class="button" id="operator">+</button>
+                <button class="button" id="operator">-</button>
+                
             <div>    
             <div class="row">
-                <button class="button" id="number-zero">0</button>
+                <button class="button" id="number">0</button>
                 <button class="button" id="number">.</button>
-                <button class="button" id="operator">=</button>
+                <button class="btn" id="equals">=</button>
+                <button class="button" id="operator">+</button>
+                   
              <div>     
 
         </div>
     </div>
+
+    <script>
+        let number1;
+        let number2;
+        let op;
+        function add(a, b){
+            return a+b;
+        }
+        function subtract(a, b){
+            return a-b;
+        }
+        function multiply(a, b){
+            return a*b;
+        }
+        function divide(a, b){
+            return a/b;
+        }
+        function operate(op, a, b){   
+            if(operator == "+"){
+                return add(a,b);
+            }else if(op == "-"){
+                return subtract(a, b);
+            }else if(op == "*"){
+                return multiply(a, b);
+            }else if(op == "/"){
+                return divide(a, b);
+            }
+        }
+
+        const numbers = document.querySelectorAll("#number");
+        numbers.forEach((number)=>{
+            number.addEventListener('click',()=>{
+                const display = document.querySelector(".screen-content");
+                
+                display.textContent = display.textContent + number.textContent;
+                if(display.textContent.slice(-1) != operator.textContent){
+                    number1 = number1 + number.textContent;
+                }    
+            });
+        }); 
+
+        const operators = document.querySelectorAll("#operator");
+        operators.forEach((operator)=>{
+            operator.addEventListener('click',()=>{
+                const display = document.querySelector(".screen-content");
+                if(display.textContent != "" && display.textContent.slice(-1) != operator.textContent){
+                    display.textContent = display.textContent + operator.textContent;
+                    op = operator.textContent;
+                }   
+            });
+        }); 
+        
+        const clear = document.querySelector('#clear-button');
+        clear.addEventListener('click', ()=>{
+            const display =document.querySelector(".screen-content");
+            display.textContent = "";
+        });
+
+
+
+    </script>
     
 </body>
 </html>

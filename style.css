@@ -4,7 +4,7 @@ body{
 .container{
     display: flex;
     flex-direction: column;
-    background: #eaf6f6;
+    background: #34495e;
     height: 500px;
     width: 300px;
     margin: auto;
@@ -15,36 +15,48 @@ body{
 .screen{
     width: 250px;
     height: 60px;
-    background: #fcfefe ;
+    background: white ;
     align-self: center;
     margin-top: 30px;
     border-radius: 15px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.screen-content{
+    margin-right: 10px;
+    font-size: 30px;
+    font-weight: 900;
+    color: #34495e;
 }
 .buttons-container {
     display: flex;
     flex-direction: column;
     margin: auto;
     border: none;
-    background: #eaf6f6;
+    background: #34495e;
 }
 
-.button{
+.button , .btn{
     height: 70px;
     width: 60px;
-   
-    border: #58727f solid;
-    background: #58727f;
+    border: #bbe4e9 solid;
+    background: #bbe4e9;
     border-radius: 15px;
     margin-top: 5px;
-    color: #eaf6f6;
+    color: #34495e;
     font-weight: bolder;
     font-size: larger;
 }
 
-#number-zero{
-    width: 124px;
-}
-#operator{
+
+#operator {
     border: #393939 solid;
     background: #393939;
+    color: #bbe4e9 ;
+    
+}
+#clear-button {
+    height: 40px;
+    width: 124px;
 }
