@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
+    <link rel="icon" href="https://fav.farm/📱" />
     <title >Calculator</title>
 </head>
 <body>
     <div class="container">
         <div class="screen">
-            <div class="screen-content"></div>
+            <div class="screen-content" id="display"></div>
         </div>
         <div class="buttons-container">
             <div class="row">
@@ -38,7 +39,7 @@
             <div>    
             <div class="row">
                 <button class="button" id="number">0</button>
-                <button class="button" id="number">.</button>
+                <button class="button" id="dot">.</button>
                 <button class="btn" id="equals">=</button>
                 <button class="button" id="operator">+</button>
                    
@@ -48,11 +49,12 @@
     </div>
 
     <script>
-        let number1;
-        let number2;
-        let op;
+        let number1 = "";
+        let number2 = "";
+        let op = "";
+
         function add(a, b){
-            return a+b;
+            return Number(a)+Number(b);
         }
         function subtract(a, b){
             return a-b;
@@ -61,11 +63,15 @@
             return a*b;
         }
         function divide(a, b){
-            return a/b;
+            if(b != 0 ){
+                return a/b;
+            }else{
+                return "ERROR";
+            }    
         }
         function operate(op, a, b){   
-            if(operator == "+"){
-                return add(a,b);
+            if(op == "+"){
+                return add(a, b);
             }else if(op == "-"){
                 return subtract(a, b);
             }else if(op == "*"){
@@ -75,35 +81,70 @@
             }
         }
 
+        //Numbers event listener and calculator logic tests
         const numbers = document.querySelectorAll("#number");
         numbers.forEach((number)=>{
             number.addEventListener('click',()=>{
                 const display = document.querySelector(".screen-content");
-                
-                display.textContent = display.textContent + number.textContent;
-                if(display.textContent.slice(-1) != operator.textContent){
-                    number1 = number1 + number.textContent;
-                }    
+                if(op != ""){
+                    if(number2 == ""){
+                        display.textContent = "";
+                        display.textContent += number.textContent; 
+                        number2 = display.textContent;
+                    }else{
+                        display.textContent += number.textContent; 
+                        number2 = display.textContent;
+                    }     
+                }else{
+                    display.textContent += number.textContent;
+                    number1 = display.textContent;
+                }  
             });
+            
         }); 
 
+        //Floating point tests
+        const floatingPoint = document.querySelector("#dot");
+        floatingPoint.addEventListener('click',()=>{
+            const display = document.querySelector(".screen-content");
+            if(display.textContent != ""){
+                if(display.textContent.slice(-1) != "." && display.textContent.includes(".") == false){
+                    display.textContent += ".";
+                }
+            }
+        });
+
+        //Operators event listener and calculator logic tests
         const operators = document.querySelectorAll("#operator");
         operators.forEach((operator)=>{
             operator.addEventListener('click',()=>{
                 const display = document.querySelector(".screen-content");
-                if(display.textContent != "" && display.textContent.slice(-1) != operator.textContent){
-                    display.textContent = display.textContent + operator.textContent;
+                if(op == ""){ 
                     op = operator.textContent;
-                }   
+                }else{
+                    display.textContent = operate(op, number1, number2);
+                    number1 = operate(op, number1, number2);
+                    op = operator.textContent;
+                    number2 = "";  
+                }    
             });
         }); 
         
+        //All clear Button
         const clear = document.querySelector('#clear-button');
         clear.addEventListener('click', ()=>{
-            const display =document.querySelector(".screen-content");
+            const display = document.querySelector(".screen-content");
             display.textContent = "";
+            op = "";
+            number1 = "";
+            number2 = "";
         });
 
+        //Equals Button
+        const equals = document.querySelector("#equals");
+        equals.addEventListener('click', ()=>{
+           display.textContent = +operate(op, number1, number2).toFixed(12);
+        });
 
 
     </script>

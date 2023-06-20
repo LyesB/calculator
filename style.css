@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
 body{
     background: #bbe4e9;
 }
@@ -22,12 +24,18 @@ body{
     display: flex;
     justify-content: end;
     align-items: center;
+    
 }
 .screen-content{
-    margin-right: 10px;
+    font-family:'Roboto', sans-serif;;
+    margin-right: 8px;
+    margin-left: 6px;
     font-size: 30px;
     font-weight: 900;
     color: #34495e;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
 }
 .buttons-container {
     display: flex;
@@ -38,6 +46,7 @@ body{
 }
 
 .button , .btn{
+    font-family: 'Roboto', sans-serif;
     height: 70px;
     width: 60px;
     border: #bbe4e9 solid;
@@ -46,9 +55,23 @@ body{
     margin-top: 5px;
     color: #34495e;
     font-weight: bolder;
-    font-size: larger;
+    font-size: 25px;
 }
-
+.button:hover{
+    filter: brightness(80%);
+}
+.btn:hover{
+    filter: brightness(80%);
+}
+.button:focus{
+    border: #c24d2c solid;
+}
+.btn:focus{
+    border: #c24d2c solid;
+}
+#operator:focus{
+    border: #c24d2c solid;
+}
 
 #operator {
     border: #393939 solid;
